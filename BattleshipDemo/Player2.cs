@@ -2,13 +2,11 @@ using System;
 
 namespace BattleshipDemo
 {
-    public class Player2: BattleshipField
+    public class Player2
     {
         public void CreatePlayer()
         {
-            Console.Write("Enter Name: ");
-            string name = Console.ReadLine();
-            Field();
+         
 
         }
 

@@ -2,14 +2,14 @@ using System;
 
 namespace BattleshipDemo
 {
-    public class Player1: BattleshipField
+    public class Player1:BattleshipField
     {
         public void CreatePlayer()
         {
-            Console.Write("Enter Name: ");
+            Console.WriteLine("Player1 please enter your name:");
             string name = Console.ReadLine();
-            Field();
-
+            PlaceShips(name,field1);
+            
         }
 
         
