@@ -6,7 +6,7 @@ namespace BattleshipDemo
     {
         public void CreatePlayer()
         {
-            Console.WriteLine("Player1 please enter your name:");
+            Console.WriteLine("Player#1 please enter your name:");
             string name = Console.ReadLine();
             PlaceShips(name,field1);
             
