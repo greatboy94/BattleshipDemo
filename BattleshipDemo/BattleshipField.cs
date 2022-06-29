@@ -7,11 +7,11 @@ namespace BattleshipDemo
         public static int[,] field1 = new int[6, 6];
         public static int[,] field2 = new int[6, 6];
         
-        static int[,] show1 = new int[6, 6];
-        static int[,] show2 = new int[6, 6];
+        public static int[,] show1 = new int[6, 6];
+        public static int[,] show2 = new int[6, 6];
         
 
-        public static void PlaceShips(string playerName, int[,] field)
+        public void PlaceShips(string playerName, int[,] field)
         {
             
             Console.WriteLine($"{playerName} -> Please place your triple deck ship [You have only 1]");
@@ -89,7 +89,7 @@ namespace BattleshipDemo
                 Console.WriteLine("2. Horizontal");
                 int line = Convert.ToInt32(Console.ReadLine());
 
-                for (int j = 0; j < doubleDeck; j++)
+                for (int j = 0; j < singleDeck; j++)
                 {
                     if (line==1)
                     {
@@ -104,7 +104,7 @@ namespace BattleshipDemo
             }
         }
         
-        public static void BattleArea(int[,] field)
+        public void BattleArea(int[,] field)
         {
             for (int i = 0; i < field.GetLength(0); i++)
             {
@@ -122,6 +122,50 @@ namespace BattleshipDemo
                 Console.WriteLine();
             }
       
+        }
+        
+        public static void Fire(string playerName, int[,] show, int[,] field)
+        {
+            while (true)
+            {
+                Console.WriteLine(playerName + " fire to ships");
+                for (int i = 0; i < show.GetLength(0); i++)
+                {
+                    for (int j = 0; j < show.GetLength(1); j++)
+                    {
+                        if (show[j, i] == 0)
+                        {
+                            Console.Write("[ ] ");
+                        }
+                        else if (show[j, i] == 1)
+                        {
+                            Console.WriteLine(". ");
+                        }
+                        else
+                        {
+                            Console.Write("[*] ");
+                        }
+                    }
+
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine("Please enter X index coordinate:");
+                int x = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Please enter Y index coordinates:");
+                int y = Convert.ToInt32(Console.ReadLine());
+                if (field[x, y] == 1)
+                {
+                    Console.WriteLine("Hit, Fire again");
+                    show[x, y] = 2;
+                }
+                else
+                {
+                    Console.WriteLine("Miss, wait your next move");
+                    show[x, y] = 1;
+                    break;
+                }
+            }
         }
     }
 }
