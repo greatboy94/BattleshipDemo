@@ -139,7 +139,7 @@ namespace BattleshipDemo
                         }
                         else if (show[j, i] == 1)
                         {
-                            Console.WriteLine(". ");
+                            Console.Write("[X] ");
                         }
                         else
                         {
@@ -166,6 +166,47 @@ namespace BattleshipDemo
                     break;
                 }
             }
+        }
+
+        public static bool CheckWinner()
+        {
+            int count1 = 0;
+            int count2 = 0;
+
+            for (int i = 0; i < show1.GetLength(0); i++)
+            {
+                for (int j = 0; j < show1.GetLength(1); j++)
+                {
+                    if (show1[i,j]==2)
+                    {
+                        count1++;
+                    }
+                }
+            }
+            
+            for (int i = 0; i < show2.GetLength(0); i++)
+            {
+                for (int j = 0; j < show2.GetLength(1); j++)
+                {
+                    if (show2[i,j]==2)
+                    {
+                        count2++;
+                    }
+                }
+            }
+
+            if (count1>=10)
+            {
+                Console.WriteLine($"{Player1.name} Winner");
+                return true;
+            }
+            if (count2>=10)
+            {
+                Console.WriteLine($"{Player2.name} Winner");
+                return true;
+            }
+
+            return false;
         }
     }
 }
