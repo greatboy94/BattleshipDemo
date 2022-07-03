@@ -106,8 +106,10 @@ namespace BattleshipDemo
         
         public void BattleArea(int[,] field)
         {
+            Console.WriteLine("   0   1   2   3   4   5");
             for (int i = 0; i < field.GetLength(0); i++)
             {
+                Console.Write(i+"-");
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
                     if (field[j,i]==0)
