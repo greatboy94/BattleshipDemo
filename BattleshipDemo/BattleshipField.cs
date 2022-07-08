@@ -60,6 +60,12 @@ namespace BattleshipDemo
                 Console.WriteLine("2. Horizontal");
                 int line = Convert.ToInt32(Console.ReadLine());
 
+                if (!CheckNearbyShips(x,y,doubleDeck,line,field))
+                {
+                    Console.WriteLine("This field is not empty");
+                    continue;
+                }
+
                 for (int j = 0; j < doubleDeck; j++)
                 {
                     if (line==1)
@@ -125,14 +131,17 @@ namespace BattleshipDemo
             }
       
         }
+     
         
         public static void Fire(string playerName, int[,] show, int[,] field)
         {
             while (true)
             {
                 Console.WriteLine(playerName + " fire to ships");
+                Console.WriteLine("   0   1   2   3   4   5");
                 for (int i = 0; i < show.GetLength(0); i++)
                 {
+                    Console.Write(i+"-");
                     for (int j = 0; j < show.GetLength(1); j++)
                     {
                         if (show[j, i] == 0)
@@ -209,6 +218,58 @@ namespace BattleshipDemo
             }
 
             return false;
+        }
+        
+        public static bool CheckNearbyShips(int x, int y, int shipType, int line, int[,] field)
+        {
+            while (shipType!=0)
+            {
+                
+                for (int i = 0; i < shipType; i++)
+                {
+                    int storeX = 0;
+                    int storeY = 0;
+                    if (line==1)
+                    {
+                        storeY = i;
+                    }
+                    else
+                    {
+                        storeX = i;
+                    }
+        
+                    if (x+1+storeX<field.Length && x+1+storeX>=0)
+                    {
+                        if (field[x+1+storeX, y+storeY]!=0)
+                        {
+                            return false;
+                        }
+                    }
+                    if (x-1+storeX<field.Length && x-1+storeX>=0)
+                    {
+                        if (field[x-1+storeX, y+storeY]!=0)
+                        {
+                            return false;
+                        }
+                    }
+                    
+                    if (y+1+storeY<field.Length && y+1+storeY>=0)
+                    {
+                        if (field[x+storeX, y+1+storeY]!=0)
+                        {
+                            return false;
+                        }
+                    }
+                    if (y-1+storeY<field.Length && y-1+storeY>=0)
+                    {
+                        if (field[x+storeX, y-1+storeY]!=0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 }
