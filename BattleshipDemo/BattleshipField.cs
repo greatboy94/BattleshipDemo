@@ -50,6 +50,7 @@ namespace BattleshipDemo
             Console.WriteLine($"{playerName} -> Please place your double deck ships [You have only 2]");
             for (int i = 0; i < 2; i++)
             {
+                repeat:
                 Console.WriteLine("Please enter X index coordinate:");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Please enter Y index coordinate:");
@@ -63,7 +64,7 @@ namespace BattleshipDemo
                 if (!CheckNearbyShips(x,y,doubleDeck,line,field))
                 {
                     Console.WriteLine("This field is not empty");
-                    continue;
+                    goto repeat;
                 }
 
                 for (int j = 0; j < doubleDeck; j++)
@@ -84,7 +85,7 @@ namespace BattleshipDemo
             Console.WriteLine($"{playerName} -> Please place your single deck ships [You have only 3]");
             for (int i = 0; i < 3; i++)
             {
-            
+                repeat:
                 Console.WriteLine("Please enter X index coordinate:");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Please enter Y index coordinate:");
@@ -94,6 +95,12 @@ namespace BattleshipDemo
                 Console.WriteLine("1. Vertical");
                 Console.WriteLine("2. Horizontal");
                 int line = Convert.ToInt32(Console.ReadLine());
+                
+                if (!CheckNearbyShips(x,y,singleDeck,line,field))
+                {
+                    Console.WriteLine("This field is not empty");
+                    goto repeat;
+                }
 
                 for (int j = 0; j < singleDeck; j++)
                 {
@@ -268,9 +275,10 @@ namespace BattleshipDemo
                         }
                     }
                 }
+
+                return true;
             }
             return true;
         }
     }
 }
-
