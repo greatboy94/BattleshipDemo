@@ -18,9 +18,9 @@ namespace BattleshipDemo
             BattleArea(field);
             
             int tripleDeck = 3;
-            for (int i = 0; i < 1; i++)
+            for (int i = 1; i > 0; i--)
             {
-                
+                Console.WriteLine("Remaining ships: " + i);
                 Console.WriteLine("Please enter X index coordinate:");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Please enter Y index coordinate:");
@@ -48,9 +48,10 @@ namespace BattleshipDemo
 
             int doubleDeck = 2;
             Console.WriteLine($"{playerName} -> Please place your double deck ships [You have only 2]");
-            for (int i = 0; i < 2; i++)
+            for (int i = 2; i > 0; i--)
             {
                 repeat:
+                Console.WriteLine("Remaining ships: " + i);
                 Console.WriteLine("Please enter X index coordinate:");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Please enter Y index coordinate:");
@@ -83,9 +84,10 @@ namespace BattleshipDemo
 
             int singleDeck = 1;
             Console.WriteLine($"{playerName} -> Please place your single deck ships [You have only 3]");
-            for (int i = 0; i < 3; i++)
+            for (int i = 3; i > 0; i--)
             {
                 repeat:
+                Console.WriteLine("Remaining ships: " + i);
                 Console.WriteLine("Please enter X index coordinate:");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Please enter Y index coordinate:");
@@ -183,10 +185,15 @@ namespace BattleshipDemo
                     show[x, y] = 1;
                     break;
                 }
+
+                if (CheckWinner()>0)
+                {
+                    break;
+                }
             }
         }
 
-        public static bool CheckWinner()
+        public static int CheckWinner()
         {
             int count1 = 0;
             int count2 = 0;
@@ -215,16 +222,14 @@ namespace BattleshipDemo
 
             if (count1>=10)
             {
-                Console.WriteLine($"{Player1.name} Winner");
-                return true;
+                return 1;
             }
             if (count2>=10)
             {
-                Console.WriteLine($"{Player2.name} Winner");
-                return true;
+                return 2;
             }
 
-            return false;
+            return 0;
         }
         
         public static bool CheckNearbyShips(int x, int y, int shipType, int line, int[,] field)

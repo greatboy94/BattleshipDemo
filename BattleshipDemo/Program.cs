@@ -15,13 +15,15 @@ namespace BattleshipDemo
             while (true)
             {
                 BattleshipField.Fire(Player1.name, BattleshipField.show1,BattleshipField.field2);
-                if (BattleshipField.CheckWinner())
+                if (BattleshipField.CheckWinner()==1)
                 {
+                    Console.WriteLine($"{Player1.name} Winner");
                     break;
                 }
                 BattleshipField.Fire(Player2.name, BattleshipField.show2,BattleshipField.field1);
-                if (BattleshipField.CheckWinner())
+                if (BattleshipField.CheckWinner()==2)
                 {
+                    Console.WriteLine($"{Player2.name} Winner");
                     break;
                 }
             }
