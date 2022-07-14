@@ -144,6 +144,7 @@ namespace BattleshipDemo
         
         public static void Fire(string playerName, int[,] show, int[,] field)
         {
+            bool isBreak = false;
             while (true)
             {
                 Console.WriteLine(playerName + " fire to ships");
@@ -170,20 +171,32 @@ namespace BattleshipDemo
                     Console.WriteLine();
                 }
 
+                if (isBreak)
+                {
+                    break;
+                }
+                
                 Console.WriteLine("Please enter X index coordinate:");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Please enter Y index coordinates:");
                 int y = Convert.ToInt32(Console.ReadLine());
                 if (field[x, y] == 1)
                 {
-                    Console.WriteLine("Hit, Fire again");
+                    if (CheckKilledOrInjured(x,y,field,show))
+                    {
+                        Console.WriteLine("Injured, fire again");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Killed");
+                    }
                     show[x, y] = 2;
                 }
                 else
                 {
                     Console.WriteLine("Miss, wait your next move");
                     show[x, y] = 1;
-                    break;
+                    isBreak = true;
                 }
 
                 if (CheckWinner()>0)
@@ -284,6 +297,29 @@ namespace BattleshipDemo
                 return true;
             }
             return true;
+        }
+
+        public static bool CheckKilledOrInjured(int x, int y, int[,] field, int[,] show)
+        {
+            if (x<6 && field[x+1, y]==1 && show[x+1, y]!=2)
+            {
+                return true;
+            }
+
+            if (x>1 && field[x-1, y]==1 && show[x-1, y]!=2)
+            {
+                return true;
+            }
+            if (y<6 && field[x, y+1]==1 && show[x, y+1]!=2)
+            {
+                return true;
+            }
+            if (y>1 && field[x, y-1]==1 && show[x, y-1]!=2)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
