@@ -189,6 +189,9 @@ namespace BattleshipDemo
                     else
                     {
                         Console.WriteLine("Killed");
+                        //show[x + 1, y + 1] = 1;
+                        //show[x - 1, y - 1] = 1;
+
                     }
                     show[x, y] = 2;
                 }
@@ -196,6 +199,8 @@ namespace BattleshipDemo
                 {
                     Console.WriteLine("Miss, wait your next move");
                     show[x, y] = 1;
+                    Console.WriteLine("Please hit enter for next player turn");
+                    Console.ReadKey();
                     isBreak = true;
                 }
 
@@ -247,6 +252,30 @@ namespace BattleshipDemo
         
         public static bool CheckNearbyShips(int x, int y, int shipType, int line, int[,] field)
         {
+            if (line==1)
+            {
+                if (y+shipType>field.GetLength(0))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            if (line==2)
+            {
+                if (x+shipType>field.GetLength(1))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            
             while (shipType!=0)
             {
                 
