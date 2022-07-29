@@ -191,7 +191,7 @@ namespace BattleshipDemo
                         Console.WriteLine("Killed");
                         //show[x + 1, y + 1] = 1;
                         //show[x - 1, y - 1] = 1;
-
+                        MarkX(x, y, field, show);
                     }
                     show[x, y] = 2;
                 }
@@ -210,8 +210,7 @@ namespace BattleshipDemo
                 }
             }
         }
-
-        public static int CheckWinner()
+      public static int CheckWinner()
         {
             int count1 = 0;
             int count2 = 0;
@@ -321,6 +320,13 @@ namespace BattleshipDemo
                             return false;
                         }
                     }
+                    if (y-1+storeY<field.Length && y-1+storeY>=0)
+                    {
+                        if (storeX==storeY)
+                        {
+                            return false;
+                        }
+                    }
                 }
 
                 return true;
@@ -349,6 +355,66 @@ namespace BattleshipDemo
             }
 
             return false;
+        }
+        public static void MarkX(int x, int y, int[,] field, int[,] show)
+        {
+            int storeX=-1;
+            int storeY=-1;
+
+            bool isHorizontal;
+            int countDecrement = 1;
+            while (true)
+            {
+                
+                if (x - countDecrement < 0 )
+                {
+                    storeX = x;
+                }
+                if (y - countDecrement < 0)
+                {
+                    storeY = y;
+                }
+                if (x-countDecrement > 0 && field[x-countDecrement,y]!=1)
+                {
+                    storeX = x - countDecrement;
+                }
+                if (y-countDecrement >0 && field[x,y-countDecrement]!=1)
+                {
+                    storeY = y - countDecrement;
+                }
+
+                countDecrement++;
+                if (storeX!=-1 && storeY!=-1)
+                {
+                    break;
+                }
+            }
+            
+            if (field[x+1, y]==2 || (x-1 > 0 && field[x - 1, y] == 2))
+            {
+                isHorizontal = true;
+            }
+            else
+            {
+                isHorizontal = false;
+            }
+
+            int shipLength = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                if((storeX+1+i < 6 && storeY+1+i<6) && field[isHorizontal ? (storeX+1+i) : (storeX+1) ,isHorizontal ? (storeY+1) : (storeY+1+i)] == 1)
+                {
+                    shipLength++;
+                }
+            }
+
+            for (int i = 0; i < (isHorizontal ? (shipLength+2) : 3); i++)
+            {
+                for (int j = 0; j < (isHorizontal? 3: (shipLength+2)); j++)
+                {
+                    show[storeX+i,storeY+j] = 1;
+                }
+            }
         }
     }
 }
