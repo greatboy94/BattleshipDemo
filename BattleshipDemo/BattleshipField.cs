@@ -202,6 +202,8 @@ namespace BattleshipDemo
                     Console.WriteLine("Please hit enter for next player turn");
                     Console.ReadKey();
                     isBreak = true;
+                    Console.Clear();
+                    break;
                 }
 
                 if (CheckWinner()>0)
@@ -316,13 +318,6 @@ namespace BattleshipDemo
                     if (y-1+storeY<field.Length && y-1+storeY>=0)
                     {
                         if (field[x+storeX, y-1+storeY]!=0)
-                        {
-                            return false;
-                        }
-                    }
-                    if (y-1+storeY<field.Length && y-1+storeY>=0)
-                    {
-                        if (storeX==storeY)
                         {
                             return false;
                         }
