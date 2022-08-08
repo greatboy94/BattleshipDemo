@@ -313,9 +313,9 @@ namespace BattleshipDemo
                         {
                             if(field[x+i,y+j] != 1)
                             {
-                                if(j==2 && field[x,y+j-1]==1 || j!=2)
+                                if((isHorizontal ? i==2 : j==2) && field[x+(isHorizontal ? i-1 : 0),y+(isHorizontal ? 0 : j-1)]==1 || (isHorizontal ? i!=2 : j!=2))
                                 {
-                                    if(j==3 && field[x,y+j-1]==1 || j!=3)
+                                    if((isHorizontal ? i==3 : j==3) && field[x+(isHorizontal ? i-1 : 0),y+(isHorizontal ? 0 : j-1)]==1 || (isHorizontal ?i!=3 : j!=3))
                                     {
                                         show[x+i,y+j] =1;
                                     }
@@ -330,15 +330,15 @@ namespace BattleshipDemo
                 {
                     for (int j = -1; j < (isHorizontal ? 2 : 4); j++)
                     {
-                        if(checkZone(x,i) && checkZone(y,-j))
+                        if(checkZone(x,-i) && checkZone(y,-j))
                         {
-                            if(field[x+i,y-j] != 1)
+                            if(field[x-i,y-j] != 1)
                             {
-                                if(j==2 && field[x,y-j+1]==1 || j!=2)
+                                if((isHorizontal ? i==2 : j==2) && field[x - (isHorizontal ?i-1:0),y - (isHorizontal ?0:j-1)]==1 || (isHorizontal ?i!=2 : j!=2))
                                 {
-                                    if(j==3 && field[x,y-j+1]==1 || j!=3)
+                                    if((isHorizontal ?i==3 : j==3) && field[x - (isHorizontal ?i-1:0),y + (isHorizontal ?0:j-1)]==1 || (isHorizontal ?i!=3 : j!=3))
                                     {
-                                        show[x+i,y-j] =1;
+                                        show[x-i,y-j] =1;
                                     }
                                 }
                             }
